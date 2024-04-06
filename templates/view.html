@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Results</title>
+    <style>
+        
+        .image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    margin: 10px;
+}
+
+.image-item img {
+    max-width: 200px; /* Adjust the maximum width as needed */
+    max-height: 200px; /* Adjust the maximum height as needed */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Resize the image to fit within the specified dimensions without cropping */
+}
+    </style>
+</head>
+<body>
+    <h2>Captioned Images</h2>
+    <div class="image-container">
+        {% for image_name in captions_image_names %}
+            <div class="image-item">
+                <img src="{{ url_for('static', filename='captions/' + image_name) }}" alt="{{ image_name }}">
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Detection Images</h2>
+    <div class="image-container">
+        {% for detection_name in detection_names %}
+            <div class="image-item">
+                <img src="{{ url_for('static', filename='runs/' + detection_name) }}" alt="{{ detection_name }}">
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Response JSON</h2>
+    <div class="text-content">
+        <p>{{ file_content }}</p>
+    </div>
+</body>
+</html>
